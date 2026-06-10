@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "question": "Welcome, matey! Where should you start the hunt?",
+    "choices": ["Old Oak Tree", "Harbor Beacon", "Town Square", "Captain's House"],
+    "correctAnswer": "Old Oak Tree",
+    "nextClueId": "2"
+  },
+  {
+    "id": "2",
+    "question": "You find a map with a marked X. Which direction does the map point?",
+    "choices": ["North", "East", "South", "West"],
+    "correctAnswer": "East",
+    "nextClueId": "3"
+  },
+  {
+    "id": "3",
+    "question": "A riddle reads: 'I glow at night but I'm not the moon.' What is it?",
+    "choices": ["Lantern", "Star", "Campfire", "Glowworm"],
+    "correctAnswer": "Lantern",
+    "nextClueId": "4"
+  },
+  {
+    "id": "4",
+    "question": "You see three barrels labeled A, B, C. Which barrel hides the next key?",
+    "choices": ["A", "B", "C"],
+    "correctAnswer": "B",
+    "nextClueId": "5"
+  },
+  {
+    "id": "5",
+    "question": "Final chest: which color flag opens the lock?",
+    "choices": ["Red", "Blue", "Green", "Black"],
+    "correctAnswer": "Black",
+    "nextClueId": null
+  }
+]
