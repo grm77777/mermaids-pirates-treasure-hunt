@@ -4,34 +4,39 @@
     "question": "Welcome, matey! Where should you start the hunt?",
     "choices": ["Old Oak Tree", "Harbor Beacon", "Town Square", "Captain's House"],
     "correctAnswer": "Old Oak Tree",
-    "nextClueId": "2"
+    "nextClueId": "2",
+    "hint": "Search the hollow at the base of the Old Oak Tree for the next QR code."
   },
   {
     "id": "2",
     "question": "You find a map with a marked X. Which direction does the map point?",
     "choices": ["North", "East", "South", "West"],
     "correctAnswer": "East",
-    "nextClueId": "3"
+    "nextClueId": "3",
+    "hint": "Follow the path east from the old pier until you see a lantern — search nearby for the next QR code."
   },
   {
     "id": "3",
     "question": "A riddle reads: 'I glow at night but I'm not the moon.' What is it?",
     "choices": ["Lantern", "Star", "Campfire", "Glowworm"],
     "correctAnswer": "Lantern",
-    "nextClueId": "4"
+    "nextClueId": "4",
+    "hint": "Check the lantern hung on the pier railing — the next QR is taped underneath."
   },
   {
     "id": "4",
     "question": "You see three barrels labeled A, B, C. Which barrel hides the next key?",
     "choices": ["A", "B", "C"],
     "correctAnswer": "B",
-    "nextClueId": "5"
+    "nextClueId": "5",
+    "hint": "Look behind barrel B at the back of the dock for a taped QR code."
   },
   {
     "id": "5",
     "question": "Final chest: which color flag opens the lock?",
     "choices": ["Red", "Blue", "Green", "Black"],
     "correctAnswer": "Black",
-    "nextClueId": null
+    "nextClueId": null,
+    "hint": "You've found the final spot — the chest is under the black flag behind the captain's house."
   }
 ]

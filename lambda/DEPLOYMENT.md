@@ -153,6 +153,42 @@ Lambda needs permission to read from the DynamoDB table.
 3. Click **Deploy**
 4. Copy the **Invoke URL** (e.g., `https://abc123.execute-api.us-east-1.amazonaws.com/prod`)
 
+### Add GET /clue Resource (fetch a clue)
+
+1. In the API, click **Create resource**
+  - **Resource name:** `clue`
+  - Path auto-fills: `/clue`
+  - Click **Create resource**
+
+2. Select `/clue` resource, click **Create method** → **GET**
+  - **Integration type:** Lambda function
+  - Turn on **Lambda proxy integration** if the console shows the option
+  - **Lambda function:** `scavenger-hunt-answer-validator`
+  - Click **Create method**
+
+3. Configure Method Request to accept a query string parameter named `id` (optional but helpful for documentation).
+
+4. Enable CORS on `/clue` (or create an OPTIONS method) so browsers can fetch clues from the frontend origin.
+
+5. Deploy the API again to the `prod` stage.
+
+You can test GET using:
+
+```bash
+curl "https://YOUR_API_URL/prod/clue?id=1"
+```
+
+Expected response (no correctAnswer field returned):
+
+```json
+{
+  "id": "1",
+  "question": "Welcome, matey! Where should you start the hunt?",
+  "choices": ["Old Oak Tree", "Harbor Beacon", "Town Square", "Captain's House"],
+  "nextClueId": "2"
+}
+```
+
 ---
 
 ## Step 5: Test the API

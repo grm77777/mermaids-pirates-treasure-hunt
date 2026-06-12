@@ -11,7 +11,7 @@ const TABLE_NAME = process.env.TABLE_NAME || "Clues";
  */
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 };
 
@@ -37,13 +37,53 @@ export const handler = async (event) => {
     };
   }
 
-  // Only accept POST
-  if (method !== "POST") {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+  // Support GET /clue?id=... to fetch a clue, and POST /answer to validate
+  if (method === "GET") {
+    // Get clue id from query string
+    const id = event.queryStringParameters?.id || event.query?.id;
+    if (!id) {
+      return {
+        statusCode: 400,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "Missing required query parameter: id" }),
+      };
+    }
+
+    try {
+      const result = await docClient.send(
+        new GetCommand({ TableName: TABLE_NAME, Key: { id } })
+      );
+      if (!result.Item) {
+        return {
+          statusCode: 404,
+          headers: corsHeaders,
+          body: JSON.stringify({ error: "Clue not found" }),
+        };
+      }
+
+      const clue = result.Item;
+      // Return only public fields (don't expose correctAnswer)
+      const publicClue = {
+        id: clue.id,
+        question: clue.question,
+        choices: clue.choices,
+        nextClueId: clue.nextClueId || null,
+        hint: clue.hint || null,
+      };
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify(publicClue),
+      };
+    } catch (err) {
+      console.error('Error fetching clue:', err);
+      return {
+        statusCode: 500,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: 'Internal server error', message: err.message }),
+      };
+    }
   }
 
   try {
@@ -100,6 +140,7 @@ export const handler = async (event) => {
         correct: isCorrect,
         nextClueId: isCorrect ? clue.nextClueId : null,
         message: isCorrect ? "Correct!" : "Try again!",
+        hint: isCorrect ? (clue.hint || null) : null,
       }),
     };
   } catch (error) {
