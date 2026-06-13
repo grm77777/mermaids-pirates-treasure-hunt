@@ -35,7 +35,7 @@ Write-Host "Refreshing index.html cache policy ..."
 aws s3 cp (Join-Path $dist 'index.html') "s3://$BucketName/index.html" --region $Region --cache-control "no-cache,no-store,must-revalidate" --content-type "text/html; charset=utf-8"
 
 if ($DistributionId) {
-  $invalidationPath = '/clue*'
+  $invalidationPath = @('/clue*', '/index.html', '/script.js', '/style.css')
   Write-Host "Creating CloudFront invalidation for distribution $DistributionId ..."
   aws cloudfront create-invalidation --distribution-id $DistributionId --paths $invalidationPath
 }
