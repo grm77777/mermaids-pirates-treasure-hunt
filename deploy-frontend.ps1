@@ -24,9 +24,9 @@ if (Test-Path $dist) {
 
 New-Item -ItemType Directory -Path $dist | Out-Null
 
-Copy-Item (Join-Path $root 'index.html') $dist
-Copy-Item (Join-Path $root 'style.css') $dist
-Copy-Item (Join-Path $root 'script.js') $dist
+Copy-Item (Join-Path $root 'src/index.html') $dist
+Copy-Item (Join-Path $root 'src/style.css') $dist
+Copy-Item (Join-Path $root 'src/script.js') $dist
 
 Write-Host "Uploading site files to s3://$BucketName ..."
 aws s3 sync $dist "s3://$BucketName" --delete --region $Region --cache-control "public,max-age=300"
