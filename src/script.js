@@ -120,9 +120,9 @@
     container.innerHTML = '';
     const score = el('div',{className:'feedback',id:'score-display'}, `Total score: ${formatPoints(gameState.totalPoints)}`);
     const q = el('div',{className:'card'},
-      score,
       el('div',{className:'question'},clue.question),
-      renderChoices(clue)
+      renderChoices(clue),
+      score
     );
     container.appendChild(q);
   }
