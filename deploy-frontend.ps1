@@ -27,6 +27,7 @@ New-Item -ItemType Directory -Path $dist | Out-Null
 Copy-Item (Join-Path $root 'src/index.html') $dist
 Copy-Item (Join-Path $root 'src/style.css') $dist
 Copy-Item (Join-Path $root 'src/script.js') $dist
+Copy-Item (Join-Path $root 'src/images') (Join-Path $dist 'images') -Recurse
 
 Write-Host "Uploading site files to s3://$BucketName ..."
 aws s3 sync $dist "s3://$BucketName" --delete --region $Region --cache-control "public,max-age=300"
