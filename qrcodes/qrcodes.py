@@ -1,6 +1,9 @@
 import qrcode
 
-url = "https://d2bvjw591pjdha.cloudfront.net/clue?id=2"
-file_name = "clue-2.png"
+total_clues = 14
 
-qrcode.make(url).save(file_name) # type: ignore
+for clue in range(1, total_clues + 1):
+    url = f"https://d2bvjw591pjdha.cloudfront.net/clue?id={clue}"
+    file_name = f"clue-{clue}.png"
+
+    qrcode.make(url).save(file_name) # type: ignore
